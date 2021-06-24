@@ -1,0 +1,40 @@
+---
+ - name: " update cache, install web, and php on ubuntu/RHEL-CentOS"
+   hosts: all
+   become: true
+   tasks:
+      - name: "update cache"
+        apt:
+           update_cache: yes
+        when: ansible_distribution == "Ubuntu"
+
+      - name: "update apache2"
+        apt:
+           name: apache2
+           state: latest
+        when: ansible_distribution == "Ubuntu"
+
+      - name: "Install php"
+        apt:
+           name: libapache2-mod-php
+           state: latest
+        when: ansible_distribution == "Ubuntu"
+
+      - name: "update cache"
+        yum:
+           update_cache: yes
+        when: ansible_distribution == "Red Hat Enterprise Linux"
+
+      - name: "update httpd"
+        yum:
+           name: httpd
+           state: latest
+        when: ansible_distribution == "Red Hat Enterprise Linux"   
+
+      - name: "Install php"
+        yum:
+           name: php
+           state: latest
+        when: ansible_distribution == "Red Hat Enterprise Linux"   
+
+
