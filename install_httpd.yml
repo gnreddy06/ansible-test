@@ -1,0 +1,21 @@
+---
+  
+- name: "this is 1st play in this PB; Just updated yum"
+  hosts: 10.65.122.70
+  tasks:
+   - name: "perform yum update" 
+     yum:
+       update_cache: yes
+
+- name: "This is the first play in this PlayBook to install HTTPD on all the hosts"
+  hosts: 10.65.122.70
+  become: true
+  tasks:
+   - name: "install httpd"
+     yum:
+       name: httpd
+   - name: "start the httpd service"
+     service:
+        name: httpd
+        state: started
+     
